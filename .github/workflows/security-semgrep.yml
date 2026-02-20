@@ -8,8 +8,24 @@ permissions:
   security-events: write
 
 jobs:
+  check-archived:
+    name: Check if repository is archived
+    runs-on: ubuntu-latest
+    outputs:
+      is-archived: ${{ steps.check.outputs.archived }}
+    steps:
+      - name: Check repository archive status
+        id: check
+        run: |
+          ARCHIVED=$(gh api repos/${{ github.repository }} --jq '.archived')
+          echo "archived=$ARCHIVED" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   semgrep:
     name: Semgrep
+    needs: check-archived
+    if: ${{ needs.check-archived.outputs.is-archived == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

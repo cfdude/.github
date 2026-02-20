@@ -7,6 +7,10 @@
   ],
   "labels": ["dependencies", "renovate"],
   "schedule": ["before 6am on Monday"],
+  "enabled": true,
+  "ignoredRepositories": [
+    "onvexai/job-search-agent-ui"
+  ],
   "packageRules": [
     {
       "description": "Auto-merge patch updates for all ecosystems",

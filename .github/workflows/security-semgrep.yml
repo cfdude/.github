@@ -11,6 +11,7 @@ jobs:
   check-archived:
     name: Check if repository is archived
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       is-archived: ${{ steps.check.outputs.archived }}
     steps:
@@ -24,6 +25,7 @@ jobs:
 
   semgrep:
     name: Semgrep
+    timeout-minutes: 20
     needs: check-archived
     if: ${{ needs.check-archived.outputs.is-archived == 'false' }}
     runs-on: ubuntu-latest

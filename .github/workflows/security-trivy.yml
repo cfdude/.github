@@ -73,13 +73,13 @@ jobs:
       # matches what the local pre-commit hook does -- current content, not history.
       # Version AND checksum are pinned; the action's own `version` input defaults to
       # "latest", which would be an unpinned moving target.
-      - name: Install TruffleHog 3.96.0 (checksum-pinned)
+      - name: Install TruffleHog 3.97.0 (checksum-pinned)
         run: |
           set -euo pipefail
           workdir="$(mktemp -d)"
           curl -sSfL --retry 3 -o "$workdir/th.tar.gz" \
-            https://github.com/trufflesecurity/trufflehog/releases/download/v3.96.0/trufflehog_3.96.0_linux_amd64.tar.gz
-          echo "7105f1cd6577f058a9e39d0578f1a99c8a1e481e4d3512cd8a09acfe22a0fdc0  $workdir/th.tar.gz" | sha256sum -c -
+            https://github.com/trufflesecurity/trufflehog/releases/download/v3.97.0/trufflehog_3.97.0_linux_amd64.tar.gz
+          echo "62224de2f9dd7cd418800feb953760a302ed2f82a7c547fe1146a4874fb179e4  $workdir/th.tar.gz" | sha256sum -c -
           tar xzf "$workdir/th.tar.gz" -C "$workdir" trufflehog
           sudo install -m 0755 "$workdir/trufflehog" /usr/local/bin/trufflehog
 
